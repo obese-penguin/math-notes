@@ -1,0 +1,84 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{datetime, xcolor, babel, enumitem}
+\usepackage{amsthm, thmtools, amsfonts, mathtools}
+
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+\newcommand{\exercise}[1]{\noindent {\bf Exercise #1.}}
+
+\def\inc{{\mathrel+\joinrel\mathrel+}}  
+
+\title{Chapter II - Solutions}
+\author{Riddhiman}
+\date{\monthyeardate\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Preface}%
+\label{sec:Preface}
+
+These are solutions to exercises in \textit{Analysis I} by Terrence Tao. Most of them have been written by me, some with inputs from discussions on Math StackExchange. 
+
+\section{Addition}%
+\label{sec:Addition}
+
+\exercise{2.2.1} Prove Proposition 2.2.5 which states that addition is associative. (Hint: fix two of the variables and induct on the third.)
+
+\begin{proof}[Solution]
+	Let $ a, b \text{ and } c $ be natural numbers and fix $ b $ and $ c $. We will induct over $ a $. For the base case, let $ a = 0 $. Hence from the definition of addition,  
+	\begin{equation*}
+		(0+b)+c = b+c = 0 + (b+c)
+	\end{equation*}
+	
+	Now let the hypothesis be true for some arbitrary non-zero $ a $. Thus assume that $ (a+b)+c = a+(b+c) $. To close the induction we need to prove associativity for $ a\inc $. Since, $ (a\inc) + b = (a+b)\inc $, we can write
+	\begin{equation}
+		((a\inc) + b) + c = ((a+b)\inc) = ((a+b)+c)\inc
+	\end{equation}
+	
+	Also, 
+	
+	\begin{equation}
+		(a\inc) + (b+c) = (a+(b+c))\inc
+	\end{equation}
+	
+	Since we assumed that $ a+(b+c) = (a+b)+c $, we can conclude that $ (1) = (2) $ (by Axiom 4?). This closes the induction.
+	
+\end{proof}
+
+\exercise{2.2.2} Prove Lemma 2.2.10 which states that for a positive number $ a $ there exists only one natural number $ b $ such that $ b\inc = a $ (Hint: use induction.).
+
+\begin{proof}[Solution] (by contradiction).
+    Assume that there exists a natural number $ c $ such that $ c \neq b $ and $ b\inc = c\inc = a $. However, this violates Axiom 4 which states that if $ m\inc = n\inc $ then $ m=n $. Thus our assumption is false. 
+\end{proof}
+    
+\exercise{2.2.3} Prove Proposition 2.2.12. (Hint: you will need many of the
+preceding propositions, corollaries, and lemmas.)
+
+\begin{proof}[Solution] \hfill
+	\begin{enumerate}[label=(\alph*)]
+		\item
+		\item From the definition we can write $ a = b+m, m \geq 0 $ and $ b = c+n, n \geq 0 $. Thus $ a = c+m+n $ which, again from the definition, gives $ a \geq c $
+		\item $ a \geq b \text{ gives } a = b + m, m \geq 0 \text{ but } b \geq a \text{ gives } b = a + n, n \geq 0. \text{ Thus, } a = a + m + n $ which, from Proposition 2.2.6, gives $ m + n = 0 $. Therefore $ m = n = 0 $ and $ a = b .$ 
+		\item $ a \geq b \Rightarrow a+c \geq b+c $ direction: we have $ a = b+m, m \geq 0  \Rightarrow a+c = (b+c)+m \geq b+c $ by definition.
+		\item
+		\item 
+	\end{enumerate}
+\end{proof}
+
+
+\end{document}
+
