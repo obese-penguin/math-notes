@@ -3,7 +3,10 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage{datetime}
 \usepackage{xcolor}
-\usepackage{amsthm, thmtools}
+\usepackage{amsthm, thmtools, amsfonts}
+\usepackage{mathtools}
+
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -39,7 +42,7 @@
 
 \title{Chapter II - Natural Numbers}
 \author{Riddhiman}
-\date{July 2023}
+\date{\monthyeardate\today}
 
 \begin{document}
 
@@ -49,7 +52,7 @@
 
 \section{Preface}%
 \label{sec:Preface}
-These are my self study Introductory Real Analysis notes. The source material is \textit{Analysis I} by Terrence Tao. This chapter is concerned with the construction of the Natural Numbers with the Peano Axioms and thereafter defining addition and multiplication on them. For these notes, after each Axiom we will provide \textcolor{blue}{\textbf{Examples}} and \textcolor{red}{\textbf{Counter Examples}} which will demonstrate the purpose of the axioms built and motivate the need for more axioms.
+These are my self study Introductory Real Analysis notes. The source material is \textit{Analysis I} by Terrence Tao. This chapter is concerned with the construction of the natural numbers with the Peano axioms and thereafter defining addition and multiplication on them. For these notes, after each axiom we will provide \textcolor{blue}{\textbf{Examples}} and \textcolor{red}{\textbf{Counter Examples}} which will demonstrate the purpose of the axioms built and motivate the need for more axioms.
 
 \section{The Peano axioms}%
 \label{sec:The Peano axioms}
@@ -59,7 +62,7 @@ These are my self study Introductory Real Analysis notes. The source material is
 \end{axiom}
 
 \begin{remark}
-    Note that this point may be contentious as natural numbers generally exclude $0$. One can replace \textit{zero} with \textit{one} and the behaviour of the axioms would not change at all. However, the purpose of $0$ becomes apparent with the definition of addition, as $0$ is the additive identity. 
+    Note that this point may be contentious as natural numbers generally exclude $0$. We can replace \textit{zero} with \textit{one} and the behaviour of the axioms would not change at all. However, the purpose of $0$ becomes apparent with the definition of addition, as $0$ is the additive identity. 
 \end{remark}
 
 \begin{axiom}
@@ -83,9 +86,9 @@ These are my self study Introductory Real Analysis notes. The source material is
     0 is not the successor of any natural number.
 \end{axiom}
 
-\begin{proposition}
-	4 is not equal to 0.  
-\end{proposition}
+\begin{example}
+	\textit{$4$ is not equal to $0$.}		  
+\end{example}
 
 \begin{proof}
     By definition, $4 = 3\inc$. By Axiom 1 and 2, 3 is natural number and by Axiom 3, $3\inc \neq 0$, thus $4 \neq 0$.
@@ -99,9 +102,9 @@ These are my self study Introductory Real Analysis notes. The source material is
 	Different natural numbers must have different successors. Let $n$, $m$ be two different natural numbers, then $n\inc \neq m\inc$. Equivalently, if $n\inc = m\inc$, then we must have $n=m$.
 \end{axiom}
 
-\begin{proposition}
-    6 is not equal to 2.
-\end{proposition}
+\begin{example}
+	\textit{$6$ is not equal to $2$.}
+\end{example}
 
 \begin{proof}
     We proof by contradiction. Let $6 = 5\inc = 2 = 1\inc $. By Axiom 4, $5 = 1 \Rightarrow 4\inc = 0\inc \Rightarrow 4 = 0 \Rightarrow 3\inc = 0$ which contradicts Axiom 3.
@@ -111,13 +114,64 @@ These are my self study Introductory Real Analysis notes. The source material is
 	Let $P$ be any property pertaining to a natural number $n$. Suppose that $P(0)$ is true, and suppose that whenever $P(n)$ is true, $P(n\inc)$ is also true. Then $P$ is true for all natural numbers $n$. 
 \end{axiom}
 
+\begin{proposition}
+    A certain property $ P(n) $ is true for every natural number $ n $.
+\end{proposition}
+
+\begin{proof}
+	We use induction. We first verify the base case $ n = 0 $, i.e., we prove $ P(0) $. (Insert proof of $ P(0) $ here). Now suppose inductively that $ n $ is a natural number, and $ P(n) $ has been proven. We now prove $ P(n\inc) $. (Insert proof of $ P(n\inc) $, assuming $ P(n) $ is true, here). This closes the induction, and this $ P(n) $ is true for all natural numbers $ n $.
+\end{proof}
+
+\section{Addition}%
+\label{sec:Addition}
+
+\begin{definition}[Addition of natural numbers]
+    Let $ n $ and $ m $ be natural numbers. We define $ 0 + m \coloneqq m$ and $ (n\inc) + m \coloneqq (n+m)\inc $.
+\end{definition}
+
+\begin{proposition}
+    Sum of two natural numbers is a natural number.
+\end{proposition}
+
+\begin{proof}
+	Let $ n \text{ and } m $ be natural numbers. We shall induct on $ n $, with the base case $ n = 0 $. Since, for the base case, either $ m = 0 \text{ or } m \neq 0 $, we can show, be the definition of addition, that $ 0 + 0 = 0 \text{ and } m + 0 = 0 $. Thus the base case holds. 
+	Let the hypothesis be true for a non-zero $ n \text{ s.t. } n+m $ is a natural number. We wish to prove that $ (n\inc)+m $ is also a natural number. But note that by definition,
+	\begin{equation*}
+		(n\inc)+m = (n+m)\inc
+	\end{equation*}
+	Since by induction hypothesis, $ (n+m) $ is a natural number, by Axiom 2, $ (n+m)\inc $ is also guaranteed to be a natural number. This closes the induction. 
+\end{proof}
+
+\begin{lemma}
+   For any natural number $ n, n+0 = n $. 
+\end{lemma}
+
+\begin{proof}
+	Induction over $ n $. Base case: $ 0 + 0 = 0 $. Assume $ n + 0 = n $. Then $ (n\inc)+0 = (n+0)\inc = n\inc $. 
+\end{proof}
+
+\begin{lemma}
+    For any natural numbers $ n \text{ and } m, n+(m\inc) = (n+m)\inc$. 
+\end{lemma}
+
+\begin{proof}
+	Induct over $ n $, keeping $ m $ fixed. Base case: $ 0+(m\inc) = (0+m)\inc = m\inc$ by definition. Assume $ n + (m\inc) = (n+m)\inc $. Then $ (n\inc) + (m\inc) = (n+(m\inc))\inc = ((
+	n+m)\inc)\inc$. This was the LHS. For the RHS, $ ((n\inc) + m)\inc = ((n+m)\inc)\inc $. Since both are equal, it closes our induction. 
+\end{proof}
+
+\begin{proposition}[Addition is commutative]
+	For any natural numbers $ n \text{ and } m $, $ n+m = m+n $.
+\end{proposition}
+
+\begin{proof}
+    Induction on $ n $, keeping $ m $ fixed. Base case: $ 0+m = m = m+0 $, by definition and Lemma 3.1. Assume $ n+m = m+n $. Then $ (n\inc) + m = (n+m)\inc $, and $ m+(n\inc) = (m+n)\inc $ by Lemma 3.2. Since we assume $n+m = m+n$, we can say that $ (n+m)\inc = (m+n)\inc $ (by Axiom 4?). This closes the induction.
+\end{proof}
+
+Similarly we have, 
+
+\begin{proposition}[Cancellation law]
+    Let $ a, b, c $ be natural numbers such that $ a+b=a+c $. Then we have $ b=c $.
+\end{proposition}
+
 
 \end{document}
-
-
-
-
-
-
-
-
