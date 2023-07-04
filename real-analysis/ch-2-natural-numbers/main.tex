@@ -3,7 +3,7 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage{datetime}
 \usepackage{xcolor}
-\usepackage{amsthm, thmtools, amsfonts}
+\usepackage{amsthm, thmtools, amsfonts, enumitem}
 \usepackage{mathtools}
 
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
@@ -173,5 +173,25 @@ Similarly we have,
     Let $ a, b, c $ be natural numbers such that $ a+b=a+c $. Then we have $ b=c $.
 \end{proposition}
 
+\section{Multiplication}%
+\label{sec:Multiplication}
+
+\begin{definition}[Multiplication of natural numbers]
+	Let $ m $ be a natural number. Define $ 0 \times m \coloneqq 0 $. Now suppose inductively we have shown how to multiply $ n $ to $ m $. Then we can multiply $ n\inc $ to $ m $ by defining $ (n\inc) \times m = n \times m + m $.
+\end{definition}
+
+\begin{notation}
+	We will now ditch the $ n \times m $ notation. 
+\end{notation}
+
+\begin{proposition}
+    Multiplication is commutative, associative, distributive and preserves order. Cancellation law is also valid just like in addition
+\end{proposition}
+
+\begin{proposition}[Euclidean Algorithm]
+    Let $ n $ be a natural number and let $ q $ be a positive number. Then there exist natural numbers $ m, r $ such that $ n = mq + r $ where $ 0 \leq r < q $.
+\end{proposition}
+
+Note that uniqueness is not mentioned. 
 
 \end{document}
