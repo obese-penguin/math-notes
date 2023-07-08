@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{datetime, xcolor}
+\usepackage{amsthm, thmtools, amsfonts, mathtools, amssymb}
+
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{axiom}{Axiom}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\title{Set Theory}
+\author{Riddhiman}
+\date{\monthyeardate\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Preface}%
+\label{sec:Preface}
+
+This is approximately a $ 40 $ page long chapter on introductory set theory. Brace yourselves this might get very boring. Here we basically take a break from developing different number systems to define what a set actually is. Note that we didn't really use the set notation or terminology in the previous chapter, except in some informal examples. Set theory will make it much more convenient for us to talk about number systems in the future and also to develop the notion of functions and mappings.  
+
+\section{Fundamentals}%
+\label{sec:Fundamentals}
+ 
+\begin{definition}[Informal]
+	We define a \textit{set} $ A $ to be any unordered collection of ``objects''. If $ x $ is an object, we say that $ x $ \textit{is an element of} $ A $ and denote it as $ x \in A $. Otherwise we denote it as $ x \notin A $.
+\end{definition}
+ 
+This is informal since the distinction between sets and objects has not been made among other things. We take an axiomatic approach to resolve this. 
+
+\begin{axiom}[Sets are objects]
+    If $ A $ is a set, then $ A $ is also an object. In particular, given two sets $ A $ and $ B $, it is meaningful to ask whether $ A $ is also an element of $ B $. 
+\end{axiom}
+
+\begin{definition}[Equality of sets]
+    Two sets $ A $ and $ B $ are said to be equal iff every element of $ A $ is an element of $ B $ and vice versa.
+\end{definition}
+
+\begin{notation}
+    Note that we will denote the empty set as $ \emptyset $.
+\end{notation}
+
+\begin{definition}[Empty Set]
+    There exists a set $ \emptyset $, known as the empty set, which contains no elements. 
+\end{definition}
+
+This next axiom is a bit weird. I'm not sure what it was trying to achieve and felt a little redundant. It felt like it could have had a bigger reach but instead left room for more axioms. The author did say that some axioms will be redundant. In the book it's quite long and verbose for an axiom. I provide the shortened version here, but it conveys the same information. 
+
+\begin{axiom}[Singleton set and pair sets]
+	If $ a $ is an object, then there exists a set $ \{a\} $ whose only element is $ a $; we refer to $ \{a\} $ as the singleton set whose element is $ a $. Furthermore, if $ a $ and $ b $ are objects, then there exists a set $ \{a,b\} $ whose only elements are $ a $ and $ b $; we refer to this as the pair set formed by $ a $ and $ b $.
+\end{axiom}
+
+As you can see it also introduces terminology that isn't really commonly used.(?) \par 
+
+Now we build slightly larger sets. Note that ``cardinality'' of a set has not been defined yet. 
+
+\begin{axiom}[Pairwise union]
+	Given any two sets $ A $, $ B $, there exists a set $ A \cup B $ called the union of $ A $ and $ B $. It is defined as \[ x \in A \cup B \iff (x \in A \textit{ or } x \in B) \].
+\end{axiom}
+
+\begin{proposition}[Union operation is commutative and associative]
+    If we have sets $ A $, $ B $ and $ C $, then $ A \cup B = B \cup A $ and $ (A \cup B) \cup C = A \cup (B \cup C) $.
+\end{proposition}
+
+This can be proven with Definition 2.2 and Axiom 3.
+
+
+\begin{definition}[Subsets]
+	Let $ A $, $ B $ be sets. We say that $ A $ is a \textit{subset} of $ B $, denoted by $ A \subseteq B $, iff \[ \text{For any object } x, x \in A \implies x \in B \].
+	We say that $ A $ is a proper subset of $ B $, denoted by $ A \subsetneq B $ if $ A \subseteq B $ and $ A \neq B $.
+\end{definition}
+
+% put note about subset notation here
+
+\begin{proposition}[Sets are partially ordered by set inclusion]
+    Let $ A $, $ B $, $ C $ be sets. Then if $ A \subseteq B $ and $ B \subseteq C $ then $ A \subseteq C $. If $ A \subseteq B $ and $ B \subseteq A $ then $ A = B $. Also if $ A \subsetneq B $ and $ B \subsetneq C $ then $ A \subsetneq C $.
+\end{proposition}
+
+
+
+\end{document}
