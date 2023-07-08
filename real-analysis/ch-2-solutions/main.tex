@@ -71,16 +71,33 @@ preceding propositions, corollaries, and lemmas.)
 
 \begin{proof}[Solution] \hfill
 	\begin{enumerate}[label=(\alph*)]
-		\item
-		\item From the definition we can write $ a = b+m, m \geq 0 $ and $ b = c+n, n \geq 0 $. Thus $ a = c+m+n $ which, again from the definition, gives $ a \geq c $
-		\item $ a \geq b \text{ gives } a = b + m, m \geq 0 \text{ but } b \geq a \text{ gives } b = a + n, n \geq 0. \text{ Thus, } a = a + m + n $ which, from Proposition 2.2.6, gives $ m + n = 0 $. Therefore $ m = n = 0 $ and $ a = b .$ 
-		\item $ a \geq b \implies a+c \geq b+c $ direction: we have $ a = b+m, m \geq 0  \implies a+c = (b+c)+m \geq b+c $ by definition.
-		\item $ a < b \implies b = a+m, m > 0 $. Note that there exists a predecessor of $ m $ thus $ m = n\inc $ and hence $ b = a+n\inc = (a+n)\inc \geq a\inc $ 
-		\item 
+		\item We know that if $ a = b + m $, $ m \geq 0 $ then $ a \geq b $. Let $ a = a + 0 $, then $ m = 0 $ and thus $ a \geq a $.
+
+		\item From the definition we can write $ a = b+m $, $ m \geq 0 $ and $ b = c+n $, $ n \geq 0 $. Thus $ a = c+m+n $ which, again from the definition, gives $ a \geq c $.
+
+		\item $ a \geq b \text{ gives } a = b + m $, $ m \geq 0 \text{ but } b \geq a \text{ gives } b = a + n $, $ n \geq 0. \text{ Thus, } a = a + m + n $ which, from Proposition 2.2.6, gives $ m + n = 0 $. Therefore $ m = n = 0 $ and $ a = b .$ 
+
+		\item $ a \geq b \implies a+c \geq b+c $ direction: we have $ a = b+m $, $ m \geq 0  \implies a+c = (b+c)+m \geq b+c $ by definition. \\
+			Opposite dirction: $ a + c \geq b + c \implies a + c = b + c $ \textbf{or} $ a + c > b + c $. From the first case we get, $ a = b $. From the second case, write $ a + c = (b + c) + m $, $ m > 0 $. Cancelling $ c $ we get, $ a = b + m $ which by definition is strictly greater than $ 0 $. Combining the two cases we get the desired inequality.
+
+		\item $ a < b \implies b = a+m, m > 0 $. Note that there exists a predecessor of $ m $ thus $ m = n\inc $ and hence $ b = a+n\inc = (a+n)\inc \geq a\inc $
+			
+		\item Forward direction: Let $ b = a + m $, $ m \geq 0 $. But since by definition, $ a \neq b $, we cannot invoke the cancellation law to conclude $ m = 0 $. Hence, $ m > 0 $. \\
+		      Backward direction: By definition, $ b \geq a $ but $ d \neq 0 \implies b \neq a$. Hence, discarding the $ a = b $ case we get $ b > a $. 
 	\end{enumerate}
 
-\exercise{2.2.5} \\
+\end{proof}
+
+\exercise{2.2.5} 
+\begin{proof}[Solution]
+    
+\end{proof}
+
+
 \exercise{2.2.6}
+\begin{proof}[Solution]
+   We proof this by induction and induct over $ n $. For the base case, let  $ n = 0 $, here $ m $ is also forced to be $ 0 $. So we need to prove that $ P(0) $ is true.
+
 \end{proof}
 
 
