@@ -36,9 +36,20 @@ Nothing to put here for now.
 \exercise{3.1.1} Show that the definition of equality in Definition 3.1.4 (Definition 2.2 in notes) is reflexive, symmetric, and transitive.
 
 \begin{proof}
-     
+    Let $ A $, $ B $, $ C $ be sets. To prove reflexivity we have to prove that $ \forall x (x \in A \iff x \in A) $. Since this statement is obviously true we have $ A = A $.
+    \par 
+    To prove symmetry, consider $ A $ and $ B $ such that $ A = B $. By definition we have $ \forall x (x \in A \iff x \in B) $. We have to show that $ \forall y (y \in B \iff y \in A) $. However, note that the result follows since the two statements are logically equivalent. Therefore, $ B = A $.
+    \par
+    To prove transitivity, note that for some $ x \in A $ we have $ x \in B $ since $ A = B $ and because $ B = C $ we have $ x \in C $. Similarly for some $ y \in C $ we have $ y \in B $ and thus $ y \in A $. Thus by definition we get $ A = C $.
 \end{proof}
 
+
+\exercise{3.1.2} Using only Definition 3.1.4 and Axiom 3.1, Axiom 3.2 and Axiom 3.3, prove that $ \emptyset $, $ \{ \emptyset \} $ , $ \{ \{ \emptyset \} \} $ and $ \{ \emptyset , \{ \emptyset \} \} $ are all distinct. 
+
+\begin{proof}
+	If $ \emptyset $ is equal to the other sets (say $ \mathcal{S} $) we have to show that $ \forall x (x \in \emptyset \iff x \in \mathcal{S}) $. However, note that $ \emptyset $ is empty while the others are non-empty. Hence, $ \emptyset $ cannot be equalt to the other sets. \par
+	For the rest of the sets, Axiom 1 and Axiom 2 guarantee us to compare them with Definition 3.1.4. The sets $ \{ \emptyset \} $ (say $ A $) and $ \{ \{ \emptyset \} \} $ (say $ B $) are not equal since $ \emptyset \notin B $ and $ \{ \emptyset \} \notin A $. Hence, $ \{ \emptyset \} \neq \{ \{ \emptyset \} \}$. The other pairs can be proven similarly.  
+\end{proof}
 
 
 \end{document}
