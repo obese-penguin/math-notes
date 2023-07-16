@@ -1,8 +1,10 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[a4paper, total={6in, 10in}]{geometry}
-\usepackage{datetime, xcolor}
+\usepackage{datetime, xcolor, tcolorbox}
 \usepackage{amsthm, thmtools, amsfonts, mathtools, amssymb}
+
+\tcbuselibrary{theorems}
 
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
@@ -15,6 +17,11 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{notation}{Notation}
+
+\definecolor{box-head}{rgb}{0, 0.435, 0.510}
+\definecolor{box-body}{rgb}{0.506, 0.718, 0.757}
+
+\newtcolorbox{important}[1][]{colframe=box-head, colback=box-body!28!, title=#1, fonttitle=\bfseries, before skip = 10pt}
 
 \title{Set Theory}
 \author{Riddhiman}
@@ -38,9 +45,11 @@ This is approximately a $ 40 $ page long chapter on introductory set theory. Bra
  
 This is informal since the distinction between sets and objects has not been made among other things. We take an axiomatic approach to resolve this. 
 
-\begin{axiom}[Sets are objects]
-    If $ A $ is a set, then $ A $ is also an object. In particular, given two sets $ A $ and $ B $, it is meaningful to ask whether $ A $ is also an element of $ B $. 
-\end{axiom}
+% axiom 1
+
+\begin{important}[Axiom 1: Sets are objects]
+     If $ A $ is a set, then $ A $ is also an object. In particular, given two sets $ A $ and $ B $, it is meaningful to ask whether $ A $ is also an element of $ B $. 
+\end{important}
 
 \begin{definition}[Equality of sets]
     Two sets $ A $ and $ B $ are said to be equal iff every element of $ A $ is an element of $ B $ and vice versa.
@@ -50,23 +59,31 @@ This is informal since the distinction between sets and objects has not been mad
     Note that we will denote the empty set as $ \emptyset $.
 \end{notation}
 
-\begin{axiom}[Empty Set]
-    There exists a set $ \emptyset $, known as the empty set, which contains no elements. 
-\end{axiom}
+% axiom 2
+
+\begin{important}[Axiom 2: Empty Set]
+     There exists a set $ \emptyset $, known as the empty set, which contains no elements. 
+\end{important}
+
 
 This next axiom is a bit weird. I'm not sure what it was trying to achieve and felt a little redundant. It felt like it could have had a bigger reach but instead left room for more axioms. The author did say that some axioms will be redundant. In the book it's quite long and verbose for an axiom. I provide the shortened version here, but it conveys the same information. 
 
-\begin{axiom}[Singleton set and pair sets]
-	If $ a $ is an object, then there exists a set $ \{a\} $ whose only element is $ a $; we refer to $ \{a\} $ as the singleton set whose element is $ a $. Furthermore, if $ a $ and $ b $ are objects, then there exists a set $ \{a,b\} $ whose only elements are $ a $ and $ b $; we refer to this as the pair set formed by $ a $ and $ b $.
-\end{axiom}
+% axiom 3
+
+\begin{important}[Axiom 3: Singleton set and pair sets]
+ 	If $ a $ is an object, then there exists a set $ \{a\} $ whose only element is $ a $; we refer to $ \{a\} $ as the singleton set whose element is $ a $. Furthermore, if $ a $ and $ b $ are objects, then there exists a set $ \{a,b\} $ whose only elements are $ a $ and $ b $; we refer to this as the pair set formed by $ a $ and $ b $.
+\end{important}
 
 As you can see it also introduces terminology that isn't really commonly used.(?) \par 
 
 Now we build slightly larger sets. Note that ``cardinality'' of a set has not been defined yet. 
 
-\begin{axiom}[Pairwise union]
-	Given any two sets $ A $, $ B $, there exists a set $ A \cup B $ called the union of $ A $ and $ B $. It is defined as \[ x \in A \cup B \iff (x \in A \textit{ or } x \in B) \].
-\end{axiom}
+% axiom 4
+
+\begin{important}[Axiom 4: Pairwise union]
+ 	Given any two sets $ A $, $ B $, there exists a set $ A \cup B $ called the union of $ A $ and $ B $. It is defined as \[ x \in A \cup B \iff (x \in A \textit{ or } x \in B) \].
+\end{important}
+
 
 \begin{proposition}[Union operation is commutative and associative]
     If we have sets $ A $, $ B $ and $ C $, then $ A \cup B = B \cup A $ and $ (A \cup B) \cup C = A \cup (B \cup C) $.
@@ -85,7 +102,6 @@ This can be proven with Definition 2.2 and Axiom 3.
 \begin{proposition}[Sets are partially ordered by set inclusion]
     Let $ A $, $ B $, $ C $ be sets. Then if $ A \subseteq B $ and $ B \subseteq C $ then $ A \subseteq C $. If $ A \subseteq B $ and $ B \subseteq A $ then $ A = B $. Also if $ A \subsetneq B $ and $ B \subsetneq C $ then $ A \subsetneq C $.
 \end{proposition}
-
 
 
 \end{document}
