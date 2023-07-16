@@ -1,10 +1,26 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[a4paper, total={6in, 10in}]{geometry}
-\usepackage{datetime, xcolor}
-\usepackage{amsthm, thmtools, amsfonts, mathtools}
+\usepackage{datetime, xcolor, mdframed}
+\usepackage{amsthm, thmtools, amsfonts, mathtools, amssymb}
 
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+\mdfdefinestyle{mdblackbox}{%
+	linewidth=3pt,
+	linecolor=black,
+	topline=false,
+	bottomline=false,
+	rightline=false,
+	leftline=true,
+	backgroundcolor=gray!10!
+}
+
+\declaretheoremstyle[
+	headfont=\bfseries,
+	bodyfont=\normalfont,
+	mdframed={style=mdblackbox}
+	]{thmblackbox}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -12,10 +28,21 @@
 \newtheorem{axiom}{Axiom}
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem{definition}{Definition}[section]
+
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
+% \theoremstyle{theorem}
+%\declaretheorem[name=Exercise, style=thmblackbox]{ques}
+
 \newcommand{\exercise}[1]{\noindent {\bf Exercise #1.}}
+
+\newenvironment{ques}[1][]{%
+	\begin{mdframed}[style=mdblackbox]
+		\exercise{#1}
+}{%
+\end{mdframed}
+}
 
 \title{Set Theory - Solutions}
 \author{Riddhiman}
@@ -33,7 +60,9 @@ Nothing to put here for now.
 \section{Fundamentals}%
 \label{sec:Fundamentals}
 
-\exercise{3.1.1} Show that the definition of equality in Definition 3.1.4 (Definition 2.2 in notes) is reflexive, symmetric, and transitive.
+\begin{ques}[3.1.1]
+    Show that the definition of equality in Definition 3.1.4 (Definition 2.2 in notes) is reflexive, symmetric, and transitive.
+\end{ques}
 
 \begin{proof}
     Let $ A $, $ B $, $ C $ be sets. To prove reflexivity we have to prove that $ \forall x (x \in A \iff x \in A) $. Since this statement is obviously true we have $ A = A $.
@@ -43,12 +72,45 @@ Nothing to put here for now.
     To prove transitivity, note that for some $ x \in A $ we have $ x \in B $ since $ A = B $ and because $ B = C $ we have $ x \in C $. Similarly for some $ y \in C $ we have $ y \in B $ and thus $ y \in A $. Thus by definition we get $ A = C $.
 \end{proof}
 
-
-\exercise{3.1.2} Using only Definition 3.1.4 and Axiom 3.1, Axiom 3.2 and Axiom 3.3, prove that $ \emptyset $, $ \{ \emptyset \} $ , $ \{ \{ \emptyset \} \} $ and $ \{ \emptyset , \{ \emptyset \} \} $ are all distinct. 
+\begin{ques}[3.1.2]
+	Using only Definition 3.1.4 and Axiom 3.1, Axiom 3.2 and Axiom 3.3, prove that $ \emptyset $, $ \{ \emptyset \} $ , $ \{ \{ \emptyset \} \} $ and $ \{ \emptyset , \{ \emptyset \} \} $ are all distinct. 
+\end{ques}
 
 \begin{proof}
-	If $ \emptyset $ is equal to the other sets (say $ \mathcal{S} $) we have to show that $ \forall x (x \in \emptyset \iff x \in \mathcal{S}) $. However, note that $ \emptyset $ is empty while the others are non-empty. Hence, $ \emptyset $ cannot be equalt to the other sets. \par
-	For the rest of the sets, Axiom 1 and Axiom 2 guarantee us to compare them with Definition 3.1.4. The sets $ \{ \emptyset \} $ (say $ A $) and $ \{ \{ \emptyset \} \} $ (say $ B $) are not equal since $ \emptyset \notin B $ and $ \{ \emptyset \} \notin A $. Hence, $ \{ \emptyset \} \neq \{ \{ \emptyset \} \}$. The other pairs can be proven similarly.  
+	By Definition 3.1.4 to prove that two sets are equal we need to show that each element in one set is present in the other and vice versa. Conversely, to prove that two sets are unequal it suffices to prove the existence of an element in the first set such that it does not belong to the second or vice versa. \par
+	First we claim that $ \emptyset $ is unequal to the rest of the sets provided. To start off, note that by Axiom 3.2 we have $ \emptyset = \{ \} $ and by Axiom 3.1 $ \emptyset $ may belong to some arbitrary set $ \mathcal{S} $. To prove that $ \emptyset \neq \{ \emptyset \} $, note that by definition $ \emptyset \notin \emptyset $. Since all the other sets are non-empty they cannot be equal to $ \emptyset $. \par
+	Next we wish to prove that $ \{ \emptyset \} \neq \{ \{ \emptyset \} \}$. It suffices to prove that $ \{ \emptyset \} \neq \emptyset $ but we already achieved this in the previous paragraph. This also renders $ \{ \emptyset \} \neq \{ \emptyset, \{ \emptyset \} \}$. Note that by a similar reasoning we can prove that $ \{ \{ \emptyset \} \} \neq  \{ \emptyset, \{ \emptyset \} \} $ and we are done.
+
+\end{proof}
+
+\begin{ques}[3.1.3]
+    Prove the remaining claims in Lemma 3.1.13.
+\end{ques}
+
+\begin{proof}
+	First we show that $ \{ a, b \} = \{ a \} \cup \{ b \}$. By Definition 3.1.4 we have to prove that $ \forall x (x \in \{ a, b \} \iff x \in \{ a \} \cup \{ b \} ) $. For the forward direction note that $ x = a $ or $ x = b $. If $ x = a $, then $ x \in \{ a \} \implies x \in \{ a \} \cup \{ b \} $ by Axiom 3.3. Similarly we can prove the case $ x = b $. For the reverse direction, observe that again by Axiom 3.3 $ x \in \{ a \} \implies x = a $ or $ x \in \{ b \} \implies x = b $. Since both $ a, b \in \{ a, b \} $ both the cases above are satisfied. Both directions combined we get $ \{ a, b \} = \{ a \} \cup \{ b \}$. \par
+	Next we show that for any two sets $ A $ and $ B $ we have $ A \cup B = B \cup A $. Again by Definition 3.1.4 we have to prove that $ \forall x (x \in A \cup B \iff x \in B \cup A) $. In the forward direction, $ x \in A \cup B $ suggests $ x \in A $ or $ x \in B $. If $ x \in A $ we can say $ x \in B \cup A $. Similarly we can prove the same for the case $ x \in B $. The above two statements were due to Axiom 3.3. The reverse can be proven similarly. Together combined they prove the commutativity of union of sets. \par
+	Next we have to prove that $ A \cup A = A \cup \emptyset = \emptyset \cup A = A $. By commutativity, we immediately get $ A \cup \emptyset = \emptyset \cup A $. Next, by Definition 3.1.4 we have $ \forall x (x \in A \cup A \iff x \in A) $ if $ A \cup A = A $. Note that $ x \in A \cup A $ implies $ x \in A $ or $ x \in A $, both of which are same. Hence, $ A \cup A $ is the set of all $ x \in A $ which is just $ A $. To prove that $ A \cup \emptyset = A $ apply the Definition again to get $ x \in A $ or $ x \in \emptyset $ in the forward direction. Since there does not exist any $ x $ such that $ x \in \emptyset $, the second statement is false and we are left with $ x \in A $ which is again just $ A $. $ A \cup A = A \cup \emptyset $ follows from $ A \cup \emptyset = A = A \cup A $.   
+\end{proof}
+
+\begin{ques}[3.1.4]
+    Prove the remaining claims in Proposition 3.1.18.
+\end{ques}
+
+\begin{proof}
+    We have to prove that if $ A \subseteq B $ and $ B \subseteq A $ then $ A = B $. We have to prove that $ \forall x (x \in A \iff x \in B ) $. Pick some arbitrary $ x \in A $. Since $ A \subseteq B $ we get $ x \in B $. Similarly we can pick some arbitrary $ y \in B $. Since $ B \subseteq A $ we get $ y \in A $. Combining these two we get $ x \in A \iff x \in B $ which proves the result.\par
+    Next we need to prove that if $ A \subsetneq B $ and $ B \subsetneq C $ then $ A \subsetneq C $. Again by Definition we have the following: $ x \in A \implies x \in B $ since $ A \subsetneq B $ and $ x \in B \implies x \in C $ since $ B \subsetneq C $. This is enough to prove that $ A \subseteq C $ but to complete the proof we have to show that $ A \neq C $. 
+    We prove by contradiction and assume that $ A = C $. Note that $ \forall x \in A \implies x \in B $, but since $ A \neq B $ there exists an element $ y \in B $ such that $ y \notin A $. Again since $ B \subseteq C $ we have $ y \in C $. By our assumption, this implies that $ y \in A $ which is a contradiction. Hence, $ A \neq C $
+\end{proof}
+
+\begin{ques}[3.1.5]
+    Let $ A, B $ be sets. Show that the three statements $ A \subseteq B $, $ A \cup B = B $, $ A \cap B = A $ are logically equivalent (any one of them implies the other two).
+\end{ques}
+
+\begin{proof}
+   First, we assume $ A \subseteq B $ and prove the other two. Now we choose to prove that $ \forall x (x \in A \cup B \iff x \in B) $. Pick some $ x \in A \cup B $. We either have $ x \in A $ or $ x \in B $. Since $ A \subseteq B $, $ x \in A \implies x \in B $. So ultimately we have $ x \in B $ in both the cases and the forward direction is proven. For the backward direction assume $ x \in B $, then by definition $ x \in A \cup B $ and we are done. \par
+   For $ A \cap B = A $, again pick some $ x \in A \cap B $. Thus $ x \in A $ and $ x \in B $. Note that this is just $ A $ as $ A = \{ x : x \in B \} $. Now pick an $ x \in A $, by hypothesis $ x \in B $ and thus $ x \in A \cap B $. \par 
+   Now we prove that $ (A \cup B = B) \implies (A \subseteq B) \text{ and } (A \cap B = A) $.   
 \end{proof}
 
 
