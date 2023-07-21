@@ -307,6 +307,84 @@ Given below is an example desmostrating composition of linear transformations.
 			} to the unit square. 
 \end{figure}
 
+\subsection{Invertibility of matrices and linear transformations}%
+\label{sub:Invertibility of matrices and linear transformations}
+
+
+\begin{important}[Proposition 2.3]
+	A linear transformation $ T : \mathbb{R}^n \rightarrow \mathbb{R}^m $ is invertible if and only if the $ m \times n $ matrix $ [T] $ is invertible. If it is invertible, then 
+	\begin{equation}
+		[T^{-1}] = [T]^{-1}
+	\end{equation}
+\end{important}
+
+Before we prove this lets first break it down a bit. This proposition has essentially two statements which we have to prove, 
+
+\begin{itemize}
+	\item A linear transformation $ T $ is invertible if $ [T] $ is invertible. 
+	\item $ [T] $ is invertible if the linear transformation $ T $ is invertible and $ [T^{-1}] = [T]^{-1} $.
+\end{itemize}
+
+\begin{proof}
+    We prove the statements one by one. \par
+    Assume that $ [T] $ is invertible. To prove that $ T : \mathbb{R}^n \rightarrow \mathbb{R}^m $ is invertible we just have to prove that $ T $ is both one-one and onto. Consider a vector $ \vec{y} \in \mathbb{R}^m $ and a transformation $ S : \mathbb{R}^m \rightarrow \mathbb{R}^n $ such that $ [S] = [T]^{-1} $. Thus we can write
+    \begin{equation*}
+	    \vec{y} = ([T][S])\vec{y} = T(S(\vec{y})),
+    \end{equation*}
+    This is enough to prove that $ T $ is onto, since $ \vec{y} $ can be any vector in $ \mathbb{R}^m $ and it always has a solution $ S(\vec{y}) $ in $ \mathbb{R}^n $. Next we prove that $ T $ is one-one. Assume two vectors $ \vec{x}_{1}, \vec{x}_{1} \in \mathbb{R}^n $ and that $ T(\vec{x_{1}}) = T(\vec{x}_{2}) $.  Thus, 
+    \begin{equation*}
+	    \vec{x}_{1} = ([S][T])\vec{x}_{1} = S(T(\vec{x}_{1})) = S(T(\vec{x}_{2})) = ([S][T])\vec{x}_{2} = \vec{x}_{2}.
+    \end{equation*}
+    Thus $ T $ is one-one. Hence, if $ [T] $ is invertible then $ T $ is also invertible. But aren't we assuming that $ S $ is injective here? \par
+    Now we will prove the second statement. Assume that $ T : \mathbb{R}^n \rightarrow \mathbb{R}^m $ is invertible. We will first prove that $ T^{-1} : \mathbb{R}^m \rightarrow \mathbb{R}^n $ is also linear (and hence has a matrix $ [T^{-1}] $ associated with it). This is proved by the following computation. Let $ \vec{y}_{1}, \vec{y}_{2} \in \mathbb{R}^m $, then
+    \begin{align*}
+	    T(a T^{-1}(\vec{y}_{1}) + b T^{-1}(\vec{y}_{2})) 
+	    &= aT(T^{-1}(\vec{y}_{1})) + bT(T^{-1}(\vec{y}_{2}))
+	     = a \vec{y}_{1} + b \vec{y}_{2} \\ 
+	    &= T \circ T^{-1} (a \vec{y}_{1} + b \vec{y}_{2}).
+    \end{align*}
+   
+    Since, $ T $ is one-one, we can conclude that $ a T^{-1}(\vec{y}_{1}) + b T^{-1}(\vec{y}_{2}) = T^{-1}(a \vec{y}_{1} + b \vec{y}_{2}) $ proving that $ T^{-1} $ is linear. Now we are left to prove that $ [T^{-1}] = [T]^{-1} $.
+	
+\end{proof}
+
+\section{The geometry of $ \mathbb{R}^n $}%
+
+\subsection{The dot product}%
+\label{sub:The dot product}
+Just everyone's favourite dot product. Also known as the \textit{standard inner product}.
+
+\begin{definition}[Dot product]
+	The \textit{dot product} $ \vec{x} \cdot \vec{y} $ of two vectors $ \vec{x}, \vec{y} \in \mathbb{R}^n $ is 
+	\begin{equation}
+		\vec{x} \cdot \vec{y} = 
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			\vdots \\
+			x_{n}
+		\end{bmatrix}
+                \cdot
+		\begin{bmatrix}
+			y_{1} \\
+			y_{2} \\
+			\vdots \\
+			y_{n}
+		\end{bmatrix}
+		\coloneqq x_{1}y_{1} + x_{2}y_{2} + \ldots + x_{n}y_{n}.
+	\end{equation}
+\end{definition}
+
+The dot product is commutative, distributive and can be denoted as matrix multiplication: 
+\[ \vec{x} \cdot \vec{y} = \vec{x}^{\top} \vec{y} = \vec{y}^{\top} \vec{x}. \]. 
+Similarly, matrix multiplication can be viewed in form of dot products. \par
+
+Now we define length in terms of dot product. 
+
+\begin{definition}[Length of a vector]
+    
+\end{definition}
+
 
 \end{document}
 
