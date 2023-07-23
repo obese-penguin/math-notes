@@ -35,7 +35,8 @@
 \declaretheoremstyle[
     spaceabove=5pt, 
     spacebelow=6pt, 
-    headfont=\normalfont\bfseries, 
+    headfont=\normalfont\bfseries,
+    notefont=\normalfont\bfseries,
     bodyfont = \normalfont,
     headpunct={:}]{definitionstyle} 
 \declaretheorem[name={Definition}, style=definitionstyle, numberwithin=section]{definition}
@@ -375,16 +376,96 @@ Just everyone's favourite dot product. Also known as the \textit{standard inner 
 	\end{equation}
 \end{definition}
 
+% add exercise here from page 68 of books
+
 The dot product is commutative, distributive and can be denoted as matrix multiplication: 
-\[ \vec{x} \cdot \vec{y} = \vec{x}^{\top} \vec{y} = \vec{y}^{\top} \vec{x}. \]. 
+\[ \vec{x} \cdot \vec{y} = \vec{x}^{\top} \vec{y} = \vec{y}^{\top} \vec{x}.\] 
 Similarly, matrix multiplication can be viewed in form of dot products. \par
 
 Now we define length in terms of dot product. 
 
 \begin{definition}[Length of a vector]
-    
+	The \textit{length} $ \lvert \vec{x} \rvert $ of a vector $ \vec{x} \in \mathbb{R}^n $ is
+	\begin{equation}
+		\lvert \vec{x} \rvert \coloneqq \sqrt{\vec{x} \cdot \vec{x}} = \sqrt{x_{1}^{2} + x_{2}^{2} + \cdots + x_{n}^{2}}.
+	\end{equation}
+	
 \end{definition}
 
+\subsection{Geometric interpretation}%
+\label{sub:Geometric interpretation}
+
+\begin{important}[Proposition 3.1 (Geometric interpretation of dot product).]
+	Let $ \vec{x} $, $ \vec{y} $ be vectors in $ \mathbb{R}^{2} $ or in $ \mathbb{R}^{3} $, and let $ \alpha $ be the angle between them. Then
+	\begin{equation}
+		\vec{x} \cdot \vec{y} = \lvert \vec{x} \rvert \lvert \vec{y} \rvert \cos{\alpha}.
+	\end{equation}
+	
+\end{important}
+
+\begin{proof}
+    To prove this we will use the cosine law which states that for a triangle with sides $ a $, $ b $, $ c $ and angle $ \gamma $ between sides $ a $ and $ b $, the following relation is true
+    \[ c^2 = a^2 + b^2 - 2ab\cos{\gamma}. \] 
+
+    In the figure below consider the triangle made by vectors $ \vec{x} $, $ \vec{y} $ and $ \vec{x} - \vec{y} $ and angle $ \alpha $ between $ \vec{x} $ and $ \vec{y} $. Then by cosine law we have,
+    \begin{equation}
+	    \lvert \vec{x}-\vec{y} \rvert^{2} = \lvert \vec{x} \rvert^{2} + \lvert \vec{y} \rvert^{2} - 2 \lvert \vec{x} \rvert \lvert \vec{y} \rvert \cos{\alpha}
+    \end{equation}
+    
+
+\begin{figure}[htp]
+    % vector subtraction
+	\centering
+	\begin{tikzpicture}
+		%% axes and grid
+		%\draw[help lines, color=gray!35, dashed] (-2.9, -1.9) grid (4.9,4.9);
+		\draw[] (-1, 0) -- (5, 0);
+		\draw[] (0, -1) -- (0, 5);
+
+		% vectors
+		\draw[thick, -Straight Barb] (0, 0) -- (4, 1) node[midway, below = 3pt, right] {$ \vec{x} $};
+		\draw[thick, -Straight Barb] (0, 0) -- (2, 4) node[midway, above, right=2pt] {$ \vec{y} $};
+		\draw[thick, -Straight Barb] (2, 4) -- (4, 1) node[midway, above, right] {$ \vec{x} - \vec{y} $}; 
+
+		% angle
+		%\draw (4, 1) coordinate (A) -- (0, 0) coordinate (B) -- (2, 4) coordinate (C) {angle = A--B--C};
+
+	\draw (0.8,0.2) coordinate (A) -- (0,0) coordinate (B)
+		 -- (0.37,0.74) coordinate (C)
+		 pic [draw,angle radius=1cm] {angle = A--B--C} node[midway, above=11pt, right=15pt] {$ \alpha $};
+
+	\end{tikzpicture}
+	\caption{Figure for cosine law}
+\end{figure}
+
+But note that $ \lvert \vec{x} - \vec{y} \rvert^{2} = (\vec{x} - \vec{y}) \cdot (\vec{x} - \vec{y}) $. Thus we can rewrite Equation 3.4 as, 
+\begin{align}
+	\lvert \vec{x} - \vec{y} \rvert^{2} &= (\vec{x} - \vec{y}) \cdot (\vec{x} - \vec{y}) %
+	 = ((\vec{x} - \vec{y}) \cdot \vec{x}) - ((\vec{x} - \vec{y}) \cdot \vec{y}) \\ 
+					    &= (\vec{x} \cdot \vec{x}) - (\vec{y} \cdot \vec{x}) %
+					     - (\vec{x} \cdot \vec{y}) + (\vec{y} \cdot \vec{y}) \\
+					    &= \lvert \vec{x} \rvert^2 + \lvert \vec{y} \rvert^2 - 2 \vec{x} \cdot \vec{y}. 
+\end{align}
+
+Comparing the two equation we get $ \vec{x} \cdot \vec{y} = \lvert \vec{x} \rvert \lvert \vec{y} \rvert \cos{\alpha} $.
+
+\end{proof}
+
+% dot product and projections
+% defining angles 
+% schwarz inequality
+% triangle inequality
+
+% length of a matrix
+% length of products
+
+% determinant
+% geometric interpretation
+
+% cross product
+% determinant and cross product relation
+% properties of cross product vector
+% determinant in R3
 
 \end{document}
 
