@@ -3,6 +3,7 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage{datetime, xcolor, tcolorbox}
 \usepackage{amsthm, thmtools, amsfonts, mathtools, amssymb}
+\usepackage[shortlabels]{enumitem}
 
 \tcbuselibrary{theorems}
 
@@ -13,7 +14,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{axiom}{Axiom}
 \newtheorem{proposition}{Proposition}[section]
-\newtheorem{definition}{Definition}[section]
+%\newtheorem{definition}{Definition}[section]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{notation}{Notation}
@@ -23,11 +24,23 @@
 
 \newtcolorbox{important}[1][]{colframe=box-head, colback=box-body!28!, title=#1, fonttitle=\bfseries, before skip = 10pt}
 
+\declaretheoremstyle[
+    spaceabove=5pt, 
+    spacebelow=6pt, 
+    headfont=\normalfont\bfseries,
+    notefont=\normalfont\bfseries,
+    bodyfont = \normalfont,
+    headpunct={:}]{definitionstyle} 
+\declaretheorem[name={Definition}, style=definitionstyle, numberwithin=section]{definition}
+\declaretheorem[name={Example}, style=definitionstyle, numberwithin=section]{example}
+
 \title{Set Theory}
 \author{Riddhiman}
 \date{\monthyeardate\today}
 
 \begin{document}
+
+\def\inc{{\mathrel+\joinrel\mathrel+}}  
 
 \maketitle
 
@@ -81,7 +94,7 @@ Now we build slightly larger sets. Note that ``cardinality'' of a set has not be
 % axiom 4
 
 \begin{important}[Axiom 4: Pairwise union]
- 	Given any two sets $ A $, $ B $, there exists a set $ A \cup B $ called the union of $ A $ and $ B $. It is defined as \[ x \in A \cup B \iff (x \in A \textit{ or } x \in B) \].
+ 	Given any two sets $ A $, $ B $, there exists a set $ A \cup B $ called the union of $ A $ and $ B $. It is defined as \[ x \in A \cup B \iff (x \in A \textit{ or } x \in B). \]
 \end{important}
 
 
@@ -93,7 +106,7 @@ This can be proven with Definition 2.2 and Axiom 3.
 
 
 \begin{definition}[Subsets]
-	Let $ A $, $ B $ be sets. We say that $ A $ is a \textit{subset} of $ B $, denoted by $ A \subseteq B $, iff \[ \text{For any object } x, x \in A \implies x \in B \].
+	Let $ A $, $ B $ be sets. We say that $ A $ is a \textit{subset} of $ B $, denoted by $ A \subseteq B $, iff \[ \text{For any object } x, x \in A \implies x \in B. \]
 	We say that $ A $ is a proper subset of $ B $, denoted by $ A \subsetneq B $ if $ A \subseteq B $ and $ A \neq B $.
 \end{definition}
 
@@ -105,6 +118,55 @@ This can be proven with Definition 2.2 and Axiom 3.
 
 This can be proven easily by the Definition 2.3.
 
+\begin{important}[Axiom 5: Axiom of specification]
+	Let $ A $ be a set and for every $ x \in A $ let there be a property $ P(x) $ pertaining to $ x $. Then there exists a set, called $ \{ x \in A : P(x) \text{ is true} \} $, whose elements are precisely the elements of $ A $ for which $ P(x) $ is true.  
+\end{important}
+
+Alternate phrasing of the same: To every set $ A $ and to every property $ P(x) $ there exists a set $ B $ whose elements are exactly those elements of $ A $ for which $ P(x) $ holds. 
+
+\begin{definition}[Intersections]
+	The intersection $ S_{1} \cap S_{2} $ of two sets is defined to be the set 
+	\begin{equation*}
+		S_{1} \cap S_{2} \coloneqq \{ x \in S_{1} : x \in S_{2} \}.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Difference sets]
+    Given two sets $ A $ and $ B $, we define the set $ A - B $ or $ A \ B $ to be the set $ A $ with any elements of $ B $ removed: 
+    \begin{equation*}
+        A - B \coloneqq {x \in A : x \notin B}.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}[Sets form a boolean algebra]
+    Let $ A $, $ B $, $ C $ be sets, and let $ X $ be a set containing $ A $, $ B $, $ C $ as subsets. 
+    \begin{enumerate}[(a)]
+	\item (Minimal Element) $ A \cup \emptyset = A $ and $ A \cap \emptyset = \emptyset $.
+	\item (Maximal element) $ A \cup X = X $ and $ A \cap X = A $.
+	\item (Identity) $ A \cup A = A $ and $ A \cap A = A $.
+	\item (Commutativity) $ A \cup B = B \cup A $ and $ A \cap B = B \cap A $.
+	\item (Associativity) Self explanatory. C'mon I'm not gonna write everything.
+	\item (Distributivity) $ A \cap (B \cup C) = (A \cap B) \cup (A \cap C) $ and $ A \cup (B \cap C) = (A \cup B) \cap (A \cup C) $.
+	\item (Partition) $ A \cup (X - A) = X $ and $ A \cap (X - A) = \emptyset $.
+	\item (De Morgan laws) $ X - (A \cup B) = (X - A) \cap (X - B) $ and $ X - (A \cap B) = (X - A) \cup (X - B) $.
+    \end{enumerate}
+\end{proposition}
+
+This next axiom feels a bit like its creating some notion of function, domain and range. 
+
+\begin{important}[Axiom 6: Replacement]
+	Let $ A $ be a set. For any object $ x \in A $, and any object $ y $, we have a statement $ P(x, y) $ pertaining to $ x $ and $ y $, such that for each $ x \in A $ there is atmost one $ y $ for which $ P(x, y) $ is true. Then there exists a set $ \{ y : P(x, y) \text{ is true for some } x \in A \} $, such that for any object $ z $, 
+	\begin{equation*}
+		z \in \{y : P(x, y) \text{ is true for some } x \in A \} \iff P(x, z) \text{ is true for some } x \in A.
+	\end{equation*}
+	
+\end{important}
+
+Formalising the set of natural numbers next, 
+
+\begin{important}[Axiom 7: Infinity]
+	There exists a set $ \mathbb{N} $, whose elements are called natural numbers, as well as an object $ 0 $ in $ \mathbb{N} $, and an object $ n\inc $ assigned to every natural number $ n \in \mathbb{N} $, such that the Peano axioms hold.
+\end{important}
 
 
 \end{document}
