@@ -18,7 +18,7 @@
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
+%\newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{axiom}{Axiom}
 \newtheorem{proposition}{Proposition}[section]
@@ -41,6 +41,8 @@
     headpunct={:}]{definitionstyle} 
 \declaretheorem[name={Definition}, style=definitionstyle, numberwithin=section]{definition}
 \declaretheorem[name={Example}, style=definitionstyle, numberwithin=section]{example}
+\declaretheorem[name={Corollary}, style=definitionstyle, numberwithin=section]{corollary}
+
 
 \let\oldvec = \vec
 \renewcommand{\vec}[1]{\oldvec{\mathbf{#1}}}
@@ -452,9 +454,120 @@ Comparing the two equation we get $ \vec{x} \cdot \vec{y} = \lvert \vec{x} \rver
 \end{proof}
 
 % dot product and projections
-% defining angles 
+
+\begin{corollary}[The dot product in terms of projections]
+	If $ \vec{a} $ and $ \vec{b} $ are two vectors in $ \mathbb{R}^2 $ or $ \mathbb{R}^3 $, then $ \vec{a} \cdot \vec{b} $ is the product of $ \lvert \vec{b} \rvert $ and the signed length of $ \vec{a} $ onto the line spanned by $ \vec{b} $. The signed length of the projection is positive if it points in the direction of $ \vec{b} $; it is negative if it points in the opposite direction.
+\end{corollary}
+
+
+\begin{figure}[htp]
+	\centering
+	% vector projection
+	\begin{tikzpicture}
+		%% axes and grid
+		%\draw[help lines, color=gray!35, dashed] (-2.9, -1.9) grid (4.9,4.9);
+		\draw[] (-1, 0) -- (7, 0);
+		\draw[] (0, -1) -- (0, 5);
+
+		% angle
+
+		\draw (2,0.333) coordinate (A) -- (0,0) coordinate (B)
+		 -- (1.44,1.44) coordinate (C)
+		 pic [draw,angle radius=1cm] {angle = A--B--C} % 
+		 node[midway, above=-3pt, right=5pt] {$ \theta $};
+
+		% perpendicular
+		\draw[thin, dotted] (3, 3) -- (3.40540541, 0.567567568);
+
+		% vectors
+		\draw[thick, -Straight Barb, blue] (0, 0) -- (6, 1) node[midway, below = 5pt, right=15pt] {$ \vec{b} $};
+		\draw[thick, -Straight Barb, red] (0, 0) -- (3, 3) node[midway, above, right=2pt] {$ \vec{a} $};
+		%\draw[thick, -Straight Barb] (2, 4) -- (4, 1) node[midway, above, right] {$ \vec{x} - \vec{y} $}; 
+
+			
+		% projected vector
+		\draw[line width=1, -Straight Barb, violet] (0, 0) -- (3.40540541, 0.567567568) node [midway, above=10pt, right=2pt] {$ \vec{c} $};
+
+	\end{tikzpicture}
+	\caption{Projecting a vector}
+    
+\end{figure}
+
+So above, $ \vec{a} \cdot \vec{b} = \lvert \vec{a} \rvert \lvert \vec{b} \rvert \cos{\theta} = \lvert \vec{b} \rvert \lvert \vec{c} \rvert $. 
+
+\subsection{Defining angles between vectors in $ \mathbb{R}^n $}%
+\label{sub:Defining angles between vectors in Rn}
+
+
+% defining angles
+
+Next, we want to use Equation 3.3 to define angles in $ \mathbb{R}^n $, where we can't invoke elementary geometry when $ n > 3 $. Thus, we define 
+
+\begin{equation}
+	\alpha = \arccos{\frac{\vec{v} \cdot \vec{w}}{\lvert \vec{v} \rvert\lvert \vec{w} \rvert}}
+\end{equation}
+
+But we haven't proven that 
+
+\begin{equation}
+   -1 \leq \frac{\vec{v} \cdot \vec{w}}{\lvert \vec{v} \rvert\lvert \vec{w} \rvert} \leq 1. 
+\end{equation}
+
 % schwarz inequality
+
+This can be proven by the \textit{Schwarz's inequality}.
+
+\begin{important}[Theorem 3.2: Schwarz's inequality]
+	For any vectors $ \vec{v} $, $ \vec{w} \in \mathbb{R}^n $, we have
+	\begin{equation}
+	    \lvert \vec{v} \cdot \vec{w} \rvert \leq \lvert \vec{v} \rvert \lvert \vec{w} \rvert. 
+	\end{equation}
+	The two sides are equal if and only if $ \vec{v} $ or $ \vec{w} $ is a multiple of the other. 
+\end{important}
+ 
+\begin{proof}
+   If either $ \vec{v} $ or $ \vec{w} $ is $ \vec{0} $ then the statement is obvious. Hence, suppose that both are non-zero. Now consider the function $ \lvert \vec{v} + t \vec{w} \rvert^2 $. Expanding this we get,
+   \begin{equation}
+       \lvert \vec{v} + t \vec{w} \rvert^2 = \lvert \vec{v} \rvert^2 + 2t (\vec{v} \cdot \vec{w}) + t^2 \lvert \vec{w} \rvert^2,
+   \end{equation}
+
+   which is nothing but a quadratic in $ t $. Since we know that $ \lvert \vec{v} + t \vec{w} \rvert^2 \geq 0 $, we must have the determinant, $ 4(\vec{v} \cdot \vec{w})^2 - 4 \lvert \vec{w} \rvert^2 \lvert \vec{v} \rvert^2 \leq 0 $ which gives us the required inequality. \par
+   Now we want to prove that equality holds when (say) $ \vec{w} = t \vec{v} $. Then % 
+   $ \lvert \vec{v} \cdot \vec{w} \rvert = \lvert t \rvert \lvert \vec{v} \rvert^2 = (\lvert \vec{v} \rvert)(\lvert t \rvert \lvert \vec{v} \rvert ) = \lvert \vec{v} \rvert\lvert \vec{w} \rvert $. 
+\end{proof}
+
+Now we can easily define angles between two vectors, 
+\begin{definition}[The angle between two vectors]
+	The \textit{angle} between two vectors $ \vec{v} $ and $ \vec{w} $ in $ \mathbb{R}^n $ is that angle $ \alpha $ satisfying $ 0 \leq \alpha \leq \pi $ such that 
+	\begin{equation}
+		\cos{\alpha} = \frac{\vec{v} \cdot \vec{w}}{\lvert \vec{v} \rvert \lvert \vec{w} \rvert}.
+	\end{equation}
+	
+\end{definition}
+
+
 % triangle inequality
+
+An important consequence of the Schwarz's inequality is the triangle inequality. 
+
+\begin{important}[Theorem 3.3: The triangle inequality]
+	For vectors $ \vec{x}, \vec{v} \in \mathbb{R}^n $, 
+	\begin{equation}
+	    \lvert \vec{x} + \vec{y} \rvert \leq \lvert \vec{x} \rvert + \lvert \vec{y} \rvert.
+	\end{equation}
+\end{important}
+
+\begin{proof}
+   This can be proved by the following computation
+   \begin{equation}
+       \lvert \vec{x} + \vec{y} \rvert^2 = \lvert \vec{x} \rvert^2 + 2 \vec{x} \cdot \vec{y} + \lvert \vec{y} \rvert^2 \leq \lvert \vec{x} \rvert^2 + 2 \lvert \vec{x}\rvert \lvert \vec{y} \rvert + \lvert \vec{y} \rvert^2 = (\lvert \vec{x} \rvert + \lvert \vec{y} \rvert)^2 
+   \end{equation}
+   which implies $ \lvert \vec{x} + \vec{y} \rvert \leq \lvert \vec{x} \rvert + \lvert \vec{y} \rvert. $
+\end{proof}
+
+\subsection{Measuring matrices}%
+\label{sub:Measuring matrices}
+
 
 % length of a matrix
 % length of products
