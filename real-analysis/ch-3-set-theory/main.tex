@@ -168,5 +168,97 @@ Formalising the set of natural numbers next,
 	There exists a set $ \mathbb{N} $, whose elements are called natural numbers, as well as an object $ 0 $ in $ \mathbb{N} $, and an object $ n\inc $ assigned to every natural number $ n \in \mathbb{N} $, such that the Peano axioms hold.
 \end{important}
 
+\section{Russell's paradox}%
+\label{sec:Russell's paradox}
+
+Throughout we have been creating axioms that allow us to create larger and larger sets (maybe like axioms 3, 4, and 5).  The reason for such a controlled increase in the type and size of sets we could create will be apparent after this axiom.
+
+\begin{important}[Axiom 8: Universal specification]
+	Suppose for every object $ x $ we have a property $ P(x) $ pertaining to $ x $ (so that for every $ x $, $ P(x) $ is either a true or false statement). Then there exists a set $ \{ x : P(x) \text{ is true. } \} $ such that for every object $ y $, 
+	\begin{equation*}
+		y \in \{ x : P(x) \text{ is true} \} \iff P(y) \text{ is true. }
+	\end{equation*}
+\end{important}
+
+This axiom implies almost all other axioms above but cannot be introduced into set theory because it create a logical contradiction known as \textit{Russell's paradox}:\par
+Let $ P(x) $ be the statement 
+\begin{equation*}
+	P(x) \iff ``x \text{ is a set, and } x \notin x";
+\end{equation*}
+thus $ P(x) $ is true only when a set $ x $ does not contain itself. Now consider the following set, 
+\begin{equation*}
+	\Omega \coloneqq \{ x : P(x) \text{ is true.} \} = \{ x : x \text{ is a set and } x \notin x \}.
+\end{equation*}
+This is the set of all sets that do not contain themselves. Since, by Axiom 8, $ \Omega $ is also a set, it is fair to ask if $ \Omega \in \Omega $. Note that $ \Omega $ cannot contain itself. If we assume that it does, then $ \Omega $ becomes the object in $ \Omega $ that contains itself, violating $ P(x) $. However, if $ \Omega \notin \Omega $ then again, by $ P(x) $, $ \Omega $ must contain itself. This is the paradox.  \par
+
+The problem with the above axiom is that it can create sets far too large, sets that can include all kinds of objects. One way to informally resolve this issue is to create a hierarchy of objects. At the bottom are the \textit{primitive objects} -- the objects that are not sets, e.g. natural numbers. The next rung of the hierarchy are sets that only contain primitive objects, e.g. $ \{ 2, 3, 4 \} $ or $ \emptyset $; let these be called ``primitive'' sets. The next layer of the hierarchy contains set that have primitive sets as their objects and so on. This ensures that it is not possible to create sets that contain themselves.  
+
+Anyways to counter absurdities like Russell's paradox, another axiom is postulated. 
+
+\begin{important}[Axiom 9: Regularity]
+    If $ A $ is a non-empty set, then there is atleast one element $ x $ of $ A $ which is either not a set, or is disjoint from $ A $.
+\end{important}
+
+The point of this axiom is that it is asserting that at least one of the elements of $ A $ is so low on the hierarchy of objects that it does not contain any other elements of $ A $. For example in $ A = \{ \{3, 4\}, \{3, 4, \{3, 4\}\} \} $, the element $ \{3, 4\} \in A $ does not contain any other element in $ A $.
+
+\section{Functions}%
+\label{sec:Functions}
+
+\begin{definition}[Functions]
+   Let $ X $, $ Y $ be sets, and let $ P(x, y) $ be a property pertaining to an object $ x \in X $ and an object $ y \in Y $ such that \textit{for every} $ x \in X $, there is \textit{exactly one} $ y \in Y $ for which $ P(x, y) $ is true. Then we define the \textit{function} $ f : X \rightarrow Y $ defined by $ P $ on the \textit{domain} $ X $ and \textit{range} Y to be the \textit{object} which, given any input $ x \in X $, assigns an output $ f(x) \in Y $, defined to be the unique object $ f(x) $ for which $ P(x, f(x)) $ is true. Thus, for any $ x \in X $ and $ y \in Y $, 
+   \begin{equation*}
+	   y = f(x) \iff P(x, y) \text{ is true}.
+   \end{equation*}
+   
+\end{definition}
+
+\begin{example}
+	The increment operation $ \inc $ we used earlier is a function. For all $ x \in \mathbb{N} $ it guarantees a unique $ y \in \mathbb{N} $ (by Axiom 4 in previous chapter) such that $ y = x\inc $.
+\end{example}
+
+\begin{definition}[Equality of functions]
+    Two functions $ f : X \rightarrow Y $, $ g : X \rightarrow Y $ with the same domain and range are said to be equal, $ f = g $, if and only if $ f(x) = g(x) $ for all $ x \in X $.
+\end{definition}
+
+\begin{definition}[Composition]
+    Let $ f : X \rightarrow Y $ and $ g : Y \rightarrow Z $ be two functions, such that the range of $ f $ is the domain of $ g $. We then define the \textit{composition} $ g \circ f : X \rightarrow Z $ of the two functions $ g $ and $ f $ to be the function defined explicitly by the formula 
+    \begin{equation*}
+	    (g \circ f)(x) \coloneqq g(f(x)).
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}[Composition is associative]
+	Let $ f : Z \rightarrow W $, $ g : Y \rightarrow Z $, $ h : X \rightarrow Y $  be functions. Then $ f \circ (g \circ h) = (f \circ g) \circ h $.   
+\end{lemma}
+This can be easily proven by the definition above.
+
+\begin{definition}[One-to-one functions]
+    A function $ f $ is \textit{one-to-one} (or \textit{injective}) if different elements map to different elements: 
+    \[ x \neq x' \implies f(x) \neq f(x'). \]
+    Equivalently, a function is one-to-one if 
+    \[ f(x) = f(x') \implies x = x'. \]
+\end{definition}
+
+\begin{example}[Informal]
+	The function $ f : \mathbb{Z} \rightarrow \mathbb{Z} $ such that $ f(x) = x^2 $ is not injective. The function $ g : \mathbb{N} \rightarrow \mathbb{Z} $, $ g(x) = x^2 $ is injective. 
+\end{example}
+
+\begin{definition}[Onto functions]
+    A function $ f : X \rightarrow Y $ is \textit{onto} (or \textit{surjective}) if \textit{for every} $ y  \in Y $ there exists an $ x \in X $ such that $ f(x) = y $.
+\end{definition}
+
+\begin{example}
+	The increment function in Example 4.1 is not surjective as there does not exist any $ x \in \mathbb{N} $ such that $ x\inc = 0 $ (by Axiom 3 in previous chapter). However, the function $ g : \mathbb{N} \rightarrow \mathbb{N} \backslash \{ 0 \} $ is surjective. 
+\end{example}
+
+\begin{definition}[Bijective functions]
+    Functions $ f : X \rightarrow Y $ which are both one-to-one and onto are also called \textit{bijective} or \textit{invertible}.
+\end{definition}
+
+\begin{example}
+    The function $ g $ in Example 4.3 is a bijection. 
+\end{example}
+
+If a function $ f $ is bijective, then \textit{for every} $ y \in Y $, there is \textit{exactly one} $ x $ such that $ f(x) = y $.
 
 \end{document}
