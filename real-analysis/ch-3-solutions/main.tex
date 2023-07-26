@@ -3,6 +3,7 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 \usepackage{datetime, xcolor, mdframed}
 \usepackage{amsthm, thmtools, amsfonts, mathtools, amssymb}
+\usepackage[shortlabels]{enumitem}
 
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
@@ -107,12 +108,43 @@ Nothing to put here for now.
     Let $ A, B $ be sets. Show that the three statements $ A \subseteq B $, $ A \cup B = B $, $ A \cap B = A $ are logically equivalent (any one of them implies the other two).
 \end{ques}
 
+\begin{proof} 
+	~\begin{itemize}
+   		\item First, we assume $ A \subseteq B $ and prove the other two. Now we choose to prove that $ \forall x (x \in A \cup B \iff x \in B) $. Pick some $ x \in A \cup B $. We either have $ x \in A $ or $ x \in B $. Since $ A \subseteq B $, $ x \in A \implies x \in B $. So ultimately we have $ x \in B $ in both the cases and the forward direction is proven. For the backward direction assume $ x \in B $, then by definition $ x \in A \cup B $ and we are done. 
+
+   		\item For $ A \cap B = A $, again pick some $ x \in A \cap B $. Thus $ x \in A $ and $ x \in B $. Note that this is just $ A $ as $ A = \{ x : x \in B \} $. Now pick an $ x \in A $, by hypothesis $ x \in B $ and thus $ x \in A \cap B $. 
+
+   		\item Now we prove that $ (A \cup B = B) \implies (A \subseteq B) \text{ and } (A \cap B = A) $. Suppose $ A \cup B = B $ and that $ A \nsubseteq B $ then it implies that there exists some $ x \in A $ such that $ x \notin B $. Let this element be $ \mathcal{X} $. Note that by Axiom 4, we must have $ \mathcal{X} \in A \cup B $. But by our assumption, we also have $ \mathcal{X} \in B $, a contradiction. Hence, there does not exist any such $ \mathcal{X} $ and $ A \subseteq B $.
+		\item $ (A \cup B = B) \implies (A \cap B = A) $.
+
+		\item Now we prove that $ (A \cap B = A) \implies A \subseteq B $. Assume that $ A \cap B = A $ holds and assume the contrary that $ A \nsubseteq B \implies \exists \ x \in A, x \notin B $. But note that $ x \in A \implies (x \in A \land x \in B) $. This is a contradiction to our $ A \nsubseteq B $ implication. Thus $ A $ must be a subset of $ B $.
+
+		\item Now we are left to prove that $ (A \cap B = A) \implies (A \cup B = B) $. Again, $ x \in A \implies (x \in A \land x \in B) $. Also, $ x \in A \cup B \implies (x \in A \lor x \in B) $. If $ x \in B $ then we are done. If $ x \in A $, by our previous implication we have $ x \in B $. Thus for any $ x \in A \cup B $, $ x \in B \implies A \cup B = B $.  
+	\end{itemize}
+
+
+\end{proof}
+
+\begin{ques}[3.1.6]
+    Prove Proposition 3.1.28.
+\end{ques}
+
 \begin{proof}
-   First, we assume $ A \subseteq B $ and prove the other two. Now we choose to prove that $ \forall x (x \in A \cup B \iff x \in B) $. Pick some $ x \in A \cup B $. We either have $ x \in A $ or $ x \in B $. Since $ A \subseteq B $, $ x \in A \implies x \in B $. So ultimately we have $ x \in B $ in both the cases and the forward direction is proven. For the backward direction assume $ x \in B $, then by definition $ x \in A \cup B $ and we are done. \par
-   For $ A \cap B = A $, again pick some $ x \in A \cap B $. Thus $ x \in A $ and $ x \in B $. Note that this is just $ A $ as $ A = \{ x : x \in B \} $. Now pick an $ x \in A $, by hypothesis $ x \in B $ and thus $ x \in A \cap B $. \par 
-   Now we prove that $ (A \cup B = B) \implies (A \subseteq B) \text{ and } (A \cap B = A) $ [Incomplete].    
+	~\begin{enumerate}[(a)]
+		\item $ x \in A \cup \emptyset \implies (x \in A \lor x \in \emptyset) $. Since $ \nexists \ x $ such that $ x \in \emptyset $, $ x \in A \cup \emptyset \implies x \in A \implies (A \cup \emptyset = A) $. Generally to prove that equality we also need to prove that $ x \in A \implies x \in A \cup \emptyset $ but that simply follows from definition and has been left out. \par
+			$ x \in A \cap \emptyset \implies (x \in A \land x \in \emptyset) $. Since, $ \nexists \ x $ such that $ x \in \emptyset $, it implies that $ \nexists \ x $ such that $ (x \in A \land x \in \emptyset) \implies (A \cap \emptyset = \emptyset) $.
+			
+		\item $ A \cup X = X $. $ x \in A \cup X \implies (x \in A \lor x \in X) $. Since $ A \subseteq X $, $ x \in A \implies x \in X $. Thus $ x \in A \cup X \implies x \in X \implies (A \cup X = X) $. \par
+			$ A \cap X = X $. $ x \in A \cap X \implies (x \in A \lor x \in X) $. $ x \in A \implies x \in X $. In $ x \in X $ we are done.
+			
+		\item Meh.
+
+		\item Boring.
+
+		\item $ A \cap (B \cap C) = (A \cap B) \cap C $. $ x \in A \cap (B \cap C) \iff (x \in A \land x \in (B \cap C)) \iff (x \in A \land (x \in B \land x \in C)) \iff ((x \in A \land x \in B) \land x \in C) \iff (x \in (A \cap B) \land x \in C) \iff x \in (A \cap B) \cap C $. Union is similar. 
+		\item  
+	\end{enumerate}
 \end{proof}
 
 
 \end{document}
-
