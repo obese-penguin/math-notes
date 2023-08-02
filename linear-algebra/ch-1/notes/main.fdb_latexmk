@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1690394731 "main.tex" "main.pdf" "main" 1690394733
+["pdflatex"] 1690441733 "main.tex" "main.pdf" "main" 1690441735
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -286,8 +286,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1668687936 2826445 c0301f749ccce005caa81faba07ab8e8 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "main.aux" 1690394733 4454 e688db4375f14380a0def7a2ff657960 "pdflatex"
-  "main.tex" 1690394728 25288 5b84b57e560f79fcc8b25bd49f06e495 ""
+  "main.aux" 1690441735 5043 1be10d5b6e9852ac43288dd01f0275ef "pdflatex"
+  "main.tex" 1690441733 26298 8847bee99bd82172a181605aa7adab71 ""
   (generated)
   "main.aux"
   "main.log"

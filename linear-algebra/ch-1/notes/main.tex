@@ -551,7 +551,7 @@ Now we can easily define angles between two vectors,
 An important consequence of the Schwarz's inequality is the triangle inequality. 
 
 \begin{important}[Theorem 3.3: The triangle inequality]
-	For vectors $ \vec{x}, \vec{v} \in \mathbb{R}^n $, 
+	For vectors $ \vec{x}, \vec{y} \in \mathbb{R}^n $, 
 	\begin{equation}
 	    \lvert \vec{x} + \vec{y} \rvert \leq \lvert \vec{x} \rvert + \lvert \vec{y} \rvert.
 	\end{equation}
@@ -568,8 +568,30 @@ An important consequence of the Schwarz's inequality is the triangle inequality.
 \subsection{Measuring matrices}%
 \label{sub:Measuring matrices}
 
+For reasons unclear to me right now, it turns out we need a way to measure the ``length'' of a matrix. For this we take the $ m \times n $ entires of a matrix and imagine it as a point in $ \mathbb{R}^mn $ and get the distance as usual: 
 
 % length of a matrix
+
+\begin{definition}[The length of a matrix]
+    If $ A $ is an $ n \times m $ matrix, its length $ \lvert A \rvert $ is the square root of the sum of squares of all its entries: 
+    \begin{equation}
+        \lvert A \rvert^{2} \coloneqq \sum^{n}_{i=1} \sum^{m}_{j=1} a^{2}_{i, j}.  
+    \end{equation}
+\end{definition}
+
+\subsection{Lengths and matrix multiplication}%
+\label{sub:Lengths and matrix multiplication}
+
+\begin{proposition}[Lengths of products]
+	Let $ A $ be an $ n \times m $ matrix, $ B $ an $ m \times k $ matrix, and $ \vec{a} $ a vector in $ \mathbb{R}^{m} $. Then
+	\begin{align}
+	    & \lvert A \vec{b} \rvert \leq \lvert A \rvert \lvert \vec{b} \rvert, \\
+	    & \lvert AB \rvert \leq \lvert A \rvert \lvert B \rvert.
+	\end{align}
+	
+\end{proposition}
+
+
 % length of products
 
 % determinant
